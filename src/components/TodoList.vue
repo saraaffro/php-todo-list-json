@@ -47,4 +47,8 @@ export default{
     .done{
         text-decoration: line-through;
     }
+
+    li{
+        cursor: pointer;
+    }
 </style>
