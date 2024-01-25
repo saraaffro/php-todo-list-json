@@ -12,10 +12,13 @@ export default{
   methods:{
     addTodo(){
         if(this.userText.length > 0){
-            this.todos.push({type: this.userText});
+            this.todos.push({type: this.userText, done: false});
 
             this.userText = '';
         }
+    },
+    doneTask(todo){
+        todo.done = !todo.done;
     }
   },
   mounted(){
@@ -36,10 +39,12 @@ export default{
     <input type="text" v-model="userText" @keyup.enter="addTodo">
     <input type="submit" value="Invia" @click="addTodo">
     <ul>
-        <li v-for="(todo, index) in todos" :key="index">{{ todo.type }}</li>
+        <li v-for="(todo, index) in todos" :key="index" :class="todo.done ? 'done' : ''" @click="doneTask(todo)">{{ todo.type }}</li>
     </ul>
 </template>
 
 <style>
-
+    .done{
+        text-decoration: line-through;
+    }
 </style>
