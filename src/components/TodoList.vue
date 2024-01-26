@@ -61,8 +61,8 @@ export default{
 <template>
     <h1>To do list</h1>
     <form @submit.prevent="addTask">
-        <input type="text" name="text" v-model="userText" @keyup.enter="addTask">
-        <input type="submit" value="Invia" @click="addTask">
+        <input type="text" name="text" v-model="userText">
+        <input type="submit" value="aggiungi">
         <ul>
             <li v-for="(todo, index) in todos" :key="index">{{ todo.type }} <button @click="removeTask(index)">remove</button></li>
         </ul>
