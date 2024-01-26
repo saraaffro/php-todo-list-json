@@ -33,9 +33,7 @@ export default{
 
         const t = this;
         const params = {
-            params: {
-                index: index
-            }
+            index: index
         };
 
         axios.get("http://localhost/php-todo-list-json/removeTask.php", params)
@@ -64,7 +62,7 @@ export default{
         <input type="text" name="text" v-model="userText">
         <input type="submit" value="aggiungi">
         <ul>
-            <li v-for="(todo, index) in todos" :key="index">{{ todo.type }} <button @click="removeTask(index)">remove</button></li>
+            <li v-for="(todo, index) in todos" :key="index">{{ todo.type }} <i class="fa-solid fa-x" @click="removeTask(index)"></i></li>
         </ul>
     </form>
     
@@ -73,5 +71,10 @@ export default{
 <style>
     li{
         cursor: pointer;
+    }
+
+    i{
+        margin-left: 50px;
+        font-size: 12px;
     }
 </style>
