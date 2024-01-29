@@ -20,7 +20,7 @@ export default{
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
-            };
+        };
 
         axios.post('http://localhost/php-todo-list-json/addTask.php', params, config)
             .then(res => {
@@ -42,6 +42,21 @@ export default{
             })
             .catch(err => console.log(err));
     },
+    toggleTask(index){
+        const params = {
+            index: index
+        };
+        const config = {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        };
+        axios.post("http://localhost/php-todo-list-json/toggleTask.php", params, config)
+        .then(res => {
+            this.todos = res.data;
+        })
+        .catch(err => console.log(err));
+    }
   },
   mounted(){
     const t = this;
@@ -62,7 +77,15 @@ export default{
         <input type="text" name="text" v-model="userText">
         <input type="submit" value="aggiungi">
         <ul>
-            <li v-for="(todo, index) in todos" :key="index">{{ todo.type }} <i class="fa-solid fa-x" @click="removeTask(index)"></i></li>
+            <li v-for="(todo, index) in todos" :key="index" @click="toggleTask(index)">
+                <del v-if="todo.done">
+                    {{ todo.type }} <i class="fa-solid fa-x" @click="removeTask(index)"></i>
+                </del>
+                <span v-else>
+                    {{ todo.type }} <i class="fa-solid fa-x" @click="removeTask(index)"></i>
+                </span>
+                
+            </li>
         </ul>
     </form>
     
